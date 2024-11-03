@@ -1,0 +1,6 @@
+@GoTaxi_HostAddress = http://localhost:5191
+
+GET {{GoTaxi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
