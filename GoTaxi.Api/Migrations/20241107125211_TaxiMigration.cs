@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace GoTaxi.Migrations
+namespace GoTaxi.Api.Migrations
 {
     /// <inheritdoc />
     public partial class TaxiMigration : Migration
@@ -13,7 +13,7 @@ namespace GoTaxi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Destination",
+                name: "Destinations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -23,7 +23,7 @@ namespace GoTaxi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Destination", x => x.Id);
+                    table.PrimaryKey("PK_Destinations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,9 +76,9 @@ namespace GoTaxi.Migrations
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Destination_DestinationId",
+                        name: "FK_Cars_Destinations_DestinationId",
                         column: x => x.DestinationId,
-                        principalTable: "Destination",
+                        principalTable: "Destinations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -89,7 +89,7 @@ namespace GoTaxi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarInfo",
+                name: "CarInfos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -100,16 +100,16 @@ namespace GoTaxi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarInfo", x => x.Id);
+                    table.PrimaryKey("PK_CarInfos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarInfo_Cars_CarsId",
+                        name: "FK_CarInfos_Cars_CarsId",
                         column: x => x.CarsId,
                         principalTable: "Cars",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "UserCarOrders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -126,21 +126,21 @@ namespace GoTaxi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.PrimaryKey("PK_UserCarOrders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Cars_CarId",
+                        name: "FK_UserCarOrders_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Payments_PaymentsId",
+                        name: "FK_UserCarOrders_Payments_PaymentsId",
                         column: x => x.PaymentsId,
                         principalTable: "Payments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Users_UserId",
+                        name: "FK_UserCarOrders_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -148,25 +148,26 @@ namespace GoTaxi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCar",
+                name: "UserCars",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     IsOwner = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarsId = table.Column<Guid>(type: "uuid", nullable: true)
+                    CarsId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CarId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCar", x => x.Id);
+                    table.PrimaryKey("PK_UserCars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserCar_Cars_CarsId",
+                        name: "FK_UserCars_Cars_CarsId",
                         column: x => x.CarsId,
                         principalTable: "Cars",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserCar_Users_UserId",
+                        name: "FK_UserCars_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -174,7 +175,7 @@ namespace GoTaxi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SeatInfo",
+                name: "SeatInfos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -185,17 +186,17 @@ namespace GoTaxi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SeatInfo", x => x.Id);
+                    table.PrimaryKey("PK_SeatInfos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SeatInfo_CarInfo_CarInfoId",
+                        name: "FK_SeatInfos_CarInfos_CarInfoId",
                         column: x => x.CarInfoId,
-                        principalTable: "CarInfo",
+                        principalTable: "CarInfos",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarInfo_CarsId",
-                table: "CarInfo",
+                name: "IX_CarInfos_CarsId",
+                table: "CarInfos",
                 column: "CarsId");
 
             migrationBuilder.CreateIndex(
@@ -209,33 +210,33 @@ namespace GoTaxi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_CarId",
-                table: "Orders",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_PaymentsId",
-                table: "Orders",
-                column: "PaymentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId",
-                table: "Orders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SeatInfo_CarInfoId",
-                table: "SeatInfo",
+                name: "IX_SeatInfos_CarInfoId",
+                table: "SeatInfos",
                 column: "CarInfoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCar_CarsId",
-                table: "UserCar",
+                name: "IX_UserCarOrders_CarId",
+                table: "UserCarOrders",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCarOrders_PaymentsId",
+                table: "UserCarOrders",
+                column: "PaymentsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCarOrders_UserId",
+                table: "UserCarOrders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCars_CarsId",
+                table: "UserCars",
                 column: "CarsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCar_UserId",
-                table: "UserCar",
+                name: "IX_UserCars_UserId",
+                table: "UserCars",
                 column: "UserId");
         }
 
@@ -243,25 +244,25 @@ namespace GoTaxi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "SeatInfos");
 
             migrationBuilder.DropTable(
-                name: "SeatInfo");
+                name: "UserCarOrders");
 
             migrationBuilder.DropTable(
-                name: "UserCar");
+                name: "UserCars");
+
+            migrationBuilder.DropTable(
+                name: "CarInfos");
 
             migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "CarInfo");
-
-            migrationBuilder.DropTable(
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "Destination");
+                name: "Destinations");
 
             migrationBuilder.DropTable(
                 name: "Users");
