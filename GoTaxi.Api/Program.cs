@@ -1,5 +1,5 @@
-using GoTaxi.Api.Contracts;
 using GoTaxi.Api.Repositories;
+using GoTaxi.Data.Contracts;
 using GoTaxi.Data.GoTaxiDbContext;
 using GoTaxi.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +12,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<GoTaxiDbContext>(options =>
+builder.Services.AddDbContext<TaxiDbContext>(options =>
 {
-    options.UseNpgsql("TaxiDb");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("TaxiDb"));
 });
-builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IDestinationRepository, DestinationRepository>();
+builder.Services.AddScoped<ICarInfoRepository, CarInfoRepository>();
 
 var app = builder.Build();
 
