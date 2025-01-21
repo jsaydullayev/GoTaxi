@@ -5,7 +5,11 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoTaxi.Api", "GoTaxi.Api\GoTaxi.Api.csproj", "{43540C84-950F-484D-AC72-70CD458D6415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTaxi.Data", "GoTaxi.Data\GoTaxi.Data.csproj", "{4CAADDBB-C93F-4CEC-91D8-B2623738450C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoTaxi.Data", "GoTaxi.Data\GoTaxi.Data.csproj", "{4CAADDBB-C93F-4CEC-91D8-B2623738450C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTaxi.Service", "GoTaxi.Service\GoTaxi.Service.csproj", "{BBC1A721-9096-472A-8E30-0DA08B7F2A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTaxi.Common", "GoTaxi.Common\GoTaxi.Common.csproj", "{859B4480-5E39-4009-894C-8C10C86E4869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{4CAADDBB-C93F-4CEC-91D8-B2623738450C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CAADDBB-C93F-4CEC-91D8-B2623738450C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CAADDBB-C93F-4CEC-91D8-B2623738450C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC1A721-9096-472A-8E30-0DA08B7F2A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC1A721-9096-472A-8E30-0DA08B7F2A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC1A721-9096-472A-8E30-0DA08B7F2A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC1A721-9096-472A-8E30-0DA08B7F2A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859B4480-5E39-4009-894C-8C10C86E4869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859B4480-5E39-4009-894C-8C10C86E4869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859B4480-5E39-4009-894C-8C10C86E4869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859B4480-5E39-4009-894C-8C10C86E4869}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
