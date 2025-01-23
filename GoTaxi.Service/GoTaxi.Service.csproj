@@ -16,4 +16,8 @@
     <ProjectReference Include="..\GoTaxi.Data\GoTaxi.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\JWT\" />
+  </ItemGroup>
+
 </Project>
